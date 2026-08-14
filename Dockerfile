@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir -r requirements-docker.txt
 
 COPY . .
 
-EXPOSE 8000
+RUN python manage.py collectstatic --noinput
 
-CMD ["sh", "-c", "python manage.py collectstatic --noinput && gunicorn core.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn core.wsgi:application --bind 0.0.0.0:8000"]
