@@ -466,12 +466,13 @@ class HealthCheckView(APIView):
                 status=200
             )
 
-        except Exception:
-
+        except Exception as e:
             return Response(
-                {
-                    "status": "unhealthy",
-                    "database": "error"
-                },
-                status=503
+        {
+            "status": "unhealthy",
+            "database": "error",
+            "detail": str(e),
+        },
+        status=503
+    
             )    
